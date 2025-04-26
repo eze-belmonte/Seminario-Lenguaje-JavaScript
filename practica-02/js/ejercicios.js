@@ -279,7 +279,7 @@ console.log('\n');
 
 
 // ======================= EJERCICIO 11
-console.log('===================== EJERCICIO 1');
+console.log('===================== EJERCICIO 11');
 
 function identity(x) {
     return x;
@@ -302,49 +302,290 @@ console.log('\n');
 
 
 
-// ======================= EJERCICIO 1
-console.log('===================== EJERCICIO 1');
+// ======================= EJERCICIO 12
+console.log('===================== EJERCICIO 12');
+
+function reduce(array, binaryOperation, inicialValue) {
+    let total = inicialValue;
+    for (let i = 0; i < array.length; i++) {
+        total = binaryOperation(total,array[i]);
+    }
+    return total;
+}
+
+var numbers = [1,3,4,6,23,56,56,67,3,567,98,45,480,324,546,56];
+
+var sum = (x,y) => x + y;
+
+console.log(reduce(numbers, sum, 0));
 
 console.log('\n');
 
 
 
-// ======================= EJERCICIO 1
-console.log('===================== EJERCICIO 1');
+// ======================= EJERCICIO 13
+console.log('===================== EJERCICIO 13');
+
+// no encontré la manera de hacer un array con clave:valor. Uso un objeto.
+function calcularEdad(fechaNacimiento) {
+    let actual = new Date();
+    // restamos los años y ya se podria calcular la edad aproximadamente, ya que no se corroboran el mes y dia
+    let anios = actual.getFullYear() - fechaNacimiento.getFullYear();
+    // para mas presición, calculo mes y dia
+    let diaActual = actual.getDate();
+    let mesActual = actual.getMonth();
+
+    let diaPersona = fechaNacimiento.getDate();
+    let mesPersona = fechaNacimiento.getMonth();
+
+    // se corrobora que el mes que estamos sea menor o si es igual pero todavia no es el dia
+    if (mesActual < mesPersona || mesActual == mesPersona && diaActual < diaPersona)
+        anios--;
+
+    return anios;
+}
+
+function calcularIMC(persona) {
+    let altura = persona.height / 100;
+    let imc = persona.weight / altura*2;
+    return imc;
+}
+
+function inciso1(...arg) {
+    let nombres = [];
+    for (let per of arg) {
+        if (calcularIMC(per) > 25)
+            nombres.push(per.name);
+    }
+    return nombres;
+}
+
+function inciso2(...arg) {
+    let personas = {}
+    for (let per of arg)
+        personas[per.name] = calcularEdad(per.dob);
+            
+    return personas;
+}
+
+function inciso3(...arg) {
+    let imcMayores40 = [];
+    for (let per of arg) {
+        if (calcularEdad(per.dob) > 40) 
+            imcMayores40.push(calcularIMC(per));
+    }
+    return imcMayores40;
+}
+
+function inciso4(...arg) {
+    let prom = 0;
+    let cant = 0;
+    for (let per of arg) {
+        prom += calcularIMC(per);
+        cant++;
+    }
+    return prom / cant;
+}
+
+function inciso5(...arg) {
+    let min = 99999;
+    for (let per of arg) {
+        let edad = calcularEdad(per.dob);
+        if (min > edad)
+            min = edad;
+        }
+    return min;
+}
+
+function inciso6(...arg) {
+    let orden = [];
+    for (let per of arg)
+        orden.push(per);
+
+    orden.sort((a, b) => a.height - b.height);
+    return orden;
+}
+
+
+var alice = {
+    name : "Alice",
+    dob : new Date(2001, 3, 4),
+    height : 165,
+    weight : 68
+};
+
+var bob = {
+    name : "Robert",
+    dob : new Date(1997, 0, 31),
+    height : 170,
+    weight : 88
+};
+
+var charly = {
+    name : "Charles",
+    dob : new Date(1978, 9, 15),
+    height : 188,
+    weight : 102
+};
+
+var lucy = {
+    name : "Lucía",
+    dob : new Date(1955, 7, 7),
+    height : 155,
+    weight : 61
+};
+
+var peter = {
+    name : "Peter",
+    dob : new Date(1988, 2, 9),
+    height : 165,
+    weight : 99
+};
+
+var luke = {
+    name : "Lucas",
+    dob : new Date(1910, 11, 4),
+    height : 172,
+    weight : 75
+};
+
+let nombres = inciso1(alice, bob, charly, lucy, peter, luke);
+console.log(nombres);
+
+let edades = inciso2(alice, bob, charly, lucy, peter, luke);
+console.log(edades);
+
+let imcMayores40 = inciso3(alice, bob, charly, lucy, peter, luke);
+console.log(imcMayores40);
+
+console.log(inciso4(alice, bob, charly, lucy, peter, luke));
+
+console.log(inciso5(alice, bob, charly, lucy, peter, luke));
+
+let ordenado = inciso6(alice, bob, charly, lucy, peter, luke);
+console.log(ordenado);
 
 console.log('\n');
 
 
 
-// ======================= EJERCICIO 1
-console.log('===================== EJERCICIO 1');
-
-console.log('\n');
-
-
-
-// ======================= EJERCICIO 1
-console.log('===================== EJERCICIO 1');
-
-console.log('\n');
+// ======================= EJERCICIO 14
+console.log('===================== EJERCICIO 14');
+    function showMessage(message) {
+        alert(message);
+    }
 
 
 
-// ======================= EJERCICIO 1
-console.log('===================== EJERCICIO 1');
 
-console.log('\n');
+// ======================= EJERCICIO 15
+console.log('===================== EJERCICIO 15');
+function enviar() {
+    // obtengo el valor del input
+    const texto = document.getElementById("texto").value;
+    // obtengo el input directo ya que no recibo valores
+    const texto2 = document.getElementById("texto2"); 
+    // muestro en consola el contenido
+    console.log(texto);
+    // le asigno valor al input 2
+    texto2.value = texto;
+}
 
 
 
-// ======================= EJERCICIO 1
-console.log('===================== EJERCICIO 1');
 
-console.log('\n');
+// ======================= EJERCICIO 16
+console.log('===================== EJERCICIO 16');
+function mostrarImagen() {
+    // obtengo lo ingresado
+    const textoImg = document.getElementById("textoImagen").value.toLowerCase();
+
+    if (textoImg.trim() === "") {
+        return alert("Ingresar texto");
+    }
+
+    // obtengo las imagenes
+    const imagen1 = document.getElementById("imagen-1");
+    const imagen2 = document.getElementById("imagen-2");
+    const imagen3 = document.getElementById("imagen-3");
+
+    // separamos por comas, eliminamos espacios extras y por las dudas convierto todo a minúsculas
+    const imagenes = textoImg.split(",").map(img => img.trim());
+
+    for (let img of imagenes) {
+        if (img === "imagen 1") 
+            imagen1.style.display = "block";
+        if (img === "imagen 2") 
+            imagen2.style.display = "block";
+        if (img === "imagen 3") 
+            imagen3.style.display = "block";
+    }
+}
+
+function ocultarImagen() {
+    // obtengo lo ingresado
+    const textoImg = document.getElementById("textoImagen").value.toLowerCase();
+
+    // obtengo las imagenes
+    const imagen1 = document.getElementById("imagen-1");
+    const imagen2 = document.getElementById("imagen-2");
+    const imagen3 = document.getElementById("imagen-3");
+
+    // separamos por comas, eliminamos espacios extras y por las dudas convierto todo a minúsculas
+    const imagenes = textoImg.split(",").map(img => img.trim());
+
+    for (let img of imagenes) {
+        img = img.trim().toLowerCase();
+        if (img == "imagen 1")
+            imagen1.style.display = "none";
+        if (img == "imagen 2")
+            imagen2.style.display = "none";
+        if (img == "imagen 3")
+            imagen3.style.display = "none";
+    }
+}
 
 
 
-// ======================= EJERCICIO 1
-console.log('===================== EJERCICIO 1');
+// ======================= EJERCICIO 17
+console.log('===================== EJERCICIO 17');
+function mostrarImagenCheck() {
+    const check1 = document.getElementById("img-1");
+    const check2 = document.getElementById("img-2");
+    const check3 = document.getElementById("img-3");
 
-console.log('\n');
+    const imagenCheck1 = document.getElementById("imagenCheck-1");
+    const imagenCheck2 = document.getElementById("imagenCheck-2");
+    const imagenCheck3 = document.getElementById("imagenCheck-3");
+
+    if (check1.checked) {
+        imagenCheck1.style.display = "block";
+    } else {
+        imagenCheck1.style.display = "none";
+    }
+
+    if (check2.checked) {
+        imagenCheck2.style.display = "block";
+    } else {
+        imagenCheck2.style.display = "none";
+    }
+
+    if (check3.checked) {
+        imagenCheck3.style.display = "block";
+    } else {
+        imagenCheck3.style.display = "none";
+    }
+}
+// ======================= EJERCICIO 18
+console.log('===================== EJERCICIO 18');
+
+function elegir() {
+    const select = document.getElementById("colores");
+    const fondo = document.querySelector(".colorGeneral");
+    let color = select.value;
+
+    if (color === "original")
+        color =  "rgb(6, 28, 46)";
+    fondo.style.background = color;
+}
+  
