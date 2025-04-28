@@ -576,16 +576,50 @@ function mostrarImagenCheck() {
         imagenCheck3.style.display = "none";
     }
 }
+
+
+
 // ======================= EJERCICIO 18
 console.log('===================== EJERCICIO 18');
 
 function elegir() {
-    const select = document.getElementById("colores");
+    // obtienemos el ID del select que contiene la selección
+    const colores = document.getElementById("colores");
+    // obtenemos la clase del body que contiene el color de fondo
     const fondo = document.querySelector(".colorGeneral");
-    let color = select.value;
+    // guardamos el color elegido
+    let color = colores.value;
 
+    // manualmente indico el color original del body
     if (color === "original")
         color =  "rgb(6, 28, 46)";
+    // asignamos el nuevo color
     fondo.style.background = color;
 }
   
+
+
+// ======================= EJERCICIO 19
+console.log('===================== EJERCICIO 19');
+
+const colorAutomatico = document.getElementById("coloresAutomatico");
+
+// a la escucha de un cambio dentro del ID coloresAutomaticos
+colorAutomatico.addEventListener("change", function() {
+    // si se detecto un cambio, obtengo la clase que maneja el color del body
+    const fondo = document.querySelector(".colorGeneral");
+    // guardamos el valor recibido, en este caso un color;
+    let color = colorAutomatico.value;
+
+    // manualmente indico el color original del body
+    if (color === "original")
+        color =  "rgb(6, 28, 46)";
+    // asignamos el nuevo color
+    fondo.style.background = color;
+
+    // recargamos y mantenemos el cambio con localStorange
+    localStorage.reload();
+});
+
+
+
